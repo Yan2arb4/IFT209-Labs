@@ -2,6 +2,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{enumitem}
+\usepackage{graphicx}
+
 
 \title{IFT-209 Programmation Système — Devoir 1}
 \author{Jihane Adjeb \\ Yanéric Roussy}
@@ -166,6 +168,60 @@ nombre décimal:
 
 \newpage
 
+\section*{Question 2}
+Effectuer les opérations suivantes, où XB est un nombre en base B. Vous devez faire
+les opérations dans la base B:
+
+\begin{enumerate}[label=\alph*), itemsep=2em]
+
+  \item  $101110111,10011010_{2} + 10011,00011_{2} = X_{2}$
+  
+  \textbf{Solution:}
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{images/binary_addition_q3_1.png}
+  \end{figure}
+  \\
+
+  \item $714,2_{8} - 523,7_{8} = X_{8}$
+ 
+  \textbf{Solution:}
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{images/octonary_substraction_q3_2.png}
+  \end{figure}
+
+  \item $714,2_{8} - 523,7_{8} = X_{8}$
+ 
+  \textbf{Solution:}
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{images/hexadecimal_addition_q3_3.png}
+  \end{figure}
+
+  \newpage
+
+  \item $4312_{5} - 1324_{5} = X_{5}$
+ 
+  \textbf{Solution:}
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{images/quinary_multiplication_q3_4.png}
+  \end{figure}
+
+  \item $3683_{9} = X_{6}$
+ 
+  \textbf{Solution:}
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{images/senary_conversion_q3_5.png}
+  \end{figure}
+
+\end{enumerate}
+
+
+\newpage
+
 \section*{Question 3}
 Quelle est la valeur maximale d'un nombre en base 15 exprimé grâce à 7 symboles?
 Écrivez votre réponse en base 15 puis convertissez-la en base 10. \\[4pt]
@@ -189,5 +245,104 @@ N &= 14 \cdot 15^6 + 14 \cdot 15^5 + 14 \cdot 15^4 + 14 \cdot 15^3 + 14 \cdot 15
 \end{aligned}
 \]
 
+\newpage
+
+\section*{Question 4}
+On définit une valeur entière positive $0 \leq n \leq 2^{32} - 1$
+comme étant \emph{non discriminante} si, une fois décomposée en une suite d’octets, 
+elle ne permet pas de distinguer entre le format \emph{big-endian} et le format \emph{little-endian}. 
+Les valeurs non-discriminantes sont nécessairement des palindromes au niveau des octets.
+
+\begin{enumerate}
+    \item[a)] Si on exprime un mot de 32 bits de la façon suivante : ABCD
+    où chaque lettre représente un octet, exprimez mathématiquement les conditions 
+    qui vérifieront si ce mot est une valeur non-discriminante ou non.
+
+    \textbf{Solution:}
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=1\textwidth]{images/binary_addition_q3_1.png}
+    \end{figure}
+
+    \item[b)] Quelle est, dans l’intervalle [25,\; 4\,278\,190\,123],
+    la plus petite valeur non discriminante, ainsi que la plus grande valeur non discriminante ?
+
+    \textbf{Raisonnement :}
+
+Pour qu’une valeur de 32 bits soit \emph{non discriminante}, il faut qu’elle reste identique lorsqu’on inverse l’ordre des octets. 
+Autrement dit, la suite d’octets doit former un palindrome. 
+Si l’on note les octets $A$, $B$, $C$, $D$, alors la condition est
+\[
+ABCD = DCBA.
+\]
+
+Ainsi, pour un mot de 32 bits, il suffit que
+\[
+A = D \quad \text{et} \quad B = C.
+\]
+Autrement dit, la structure est de la forme
+\[
+ABBA.
+\]
+
+Chaque lettre ($A$, $B$) correspond à un octet, donc un entier compris entre $0$ et $255$ (représentation sur 8 bits).
+
+\medskip
+
+On cherche maintenant la plus petite et la plus grande valeur non discriminante dans l’intervalle
+\[
+[25,\; 4\,278\,190\,123].
+\]
+
+\medskip
+
+\underline{Valeur minimale :}  
+On ne peut pas prendre $A = B = 0$ (ce qui donnerait simplement $0$) car cela est inférieur à $25$.  
+En augmentant légèrement les octets $B$ et $C$, on obtient la configuration :
+\[
+(A)\;0000\,0000 \quad (B)\;0000\,0001 \quad (B)\;0000\,0001 \quad (A)\;0000\,0000,
+\]
+c’est-à-dire
+\[
+0000\,0000\;0000\,0001\;0000\,0001\;0000\,0000.
+\]
+
+En décimal, cela donne
+\[
+65\,792.
+\]
+
+C’est donc la plus petite valeur non discriminante dans l’intervalle donné.
+
+\medskip
+
+\underline{Valeur maximale :}  
+Pour maximiser la valeur, il faut prendre $A = 255$ et $B = 254$, ce qui donne
+\[
+(A)\;1111\,1111 \quad (B)\;1111\,1110 \quad (B)\;1111\,1110 \quad (A)\;1111\,1111,
+\]
+soit
+\[
+1111\,1111\;1111\,1110\;1111\,1110\;1111\,1111.
+\]
+
+En décimal, cela correspond à
+\[
+4\,278\,190\,078.
+\]
+
+\medskip
+
+\textbf{Conclusion :}  
+Dans l’intervalle considéré, la plus petite valeur non discriminante est
+\[
+65\,792,
+\]
+et la plus grande valeur non discriminante est
+\[
+4\,278\,190\,078.
+\]
+
+\end{enumerate}
 
 \end{document}
