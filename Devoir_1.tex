@@ -18,14 +18,14 @@ Effectuez les conversions suivantes, où $X_B$ est un nombre en base $B$ et $N$ 
 nombre décimal:
 
 \begin{enumerate}[label=\alph*), itemsep=2em]
-    \item $6241,3557_{7} = N$
+    \item $6241,355_{7} = N$
     
     \textbf{Solution:}
     \[
     \begin{aligned}
-    N &= 6 \cdot 7^3 + 2 \cdot 7^2 + 4 \cdot 7^1 + 1 \cdot 7^0 + \left(3 \cdot 7^{-1} + 5 \cdot 7^{-2} + 5 \cdot 7^{-3} + 7 \cdot 7^{-4}\right) \\
-    &= 2058 + 98 + 28 + 1 + 0.545 \\
-    &= 2185.545
+    N &= 6 \cdot 7^3 + 2 \cdot 7^2 + 4 \cdot 7^1 + 1 \cdot 7^0 + \left(3 \cdot 7^{-1} + 5 \cdot 7^{-2} + 5 \cdot 7^{-3}\right) \\
+    &= 2058 + 98 + 28 + 1 + 0.545189 \\
+    &= 2185.545189
     \end{aligned}
     \]
 
@@ -62,8 +62,8 @@ nombre décimal:
     \[
     \begin{aligned}
     N &= 10 \cdot 11^1 + 8 \cdot 11^0 + 1 \cdot 11^-1 \\
-    &= 110 + 8 + 0.9 \\
-    &= 118.9
+    &= 110 + 8 + 0.0909 \\
+    &= 118.0909
     \end{aligned}
     \]
     
@@ -77,19 +77,19 @@ nombre décimal:
     \end{aligned}
     \]
 
-    Pour la partie fractionnaire $0,9$:
+    Pour la partie fractionnaire $0,0909$ (limitée à 4 chiffres après la virgule ):
     \[
     \begin{aligned}
-    0,875 \cdot 3 &= 2.7 \\
-    0.7 \cdot 3 &= 2.1 \\
-    0.1 \cdot 3 &= 0.3 \\
-    0.3 \cdot 3 &= 0.9
+    0,0909 \cdot 5 &= 0.4545 \\
+    0.4545 \cdot 5 &= 2.2725 \\
+    0.2725 \cdot 5 &= 0.3625 \\
+    0.3625 \cdot 5 &= 0.8125
     \end{aligned}
     \]
 
     Réponse finale:
     \[
-    X_{5} = 433,\overline{2200}
+    X_{5} \approx 433,{2211}
     \]
     
     \item $31124,32_{5} = X_{25}$
@@ -124,21 +124,10 @@ nombre décimal:
 
     \item $4C85B,1A_{12} = N_{10}$
 
-    \textbf{Solution:}  
-    Valeurs : $C = 12$, $B = 11$, $A = 10$.
-    \[
-    \begin{aligned}
-    N &= 4 \cdot 12^4 + 12 \cdot 12^3 + 8 \cdot 12^2 + 5 \cdot 12^1 + 11 \cdot 12^0 \\
-      &\quad + \left(1 \cdot 12^{-1} + 10 \cdot 12^{-2}\right) \\
-    &= 82944 + 20736 + 1152 + 60 + 11 + 0.0833 + 0.0694 \\
-    &= 104903.15
-    \end{aligned}
-    \]
-
-    Réponse finale :
-    \[
-    4C85B,1A_{12} = 104903.15_{10}
-    \]
+    \textbf{Solution:} \\
+    On remarque que la lettre $C$ correspond à la valeur $12$.  
+    Or, en base $12$, les chiffres possibles vont de $0$ à $11$.  
+    Donc la présence de $C$ rend ce nombre \textbf{invalide en base 12}. 
 
     \item $LAME,DUDE_{27} = X_{9}$
 
@@ -164,7 +153,7 @@ nombre décimal:
     \[
     6254,7001_{8} = CAC.E01_{16}
     \]
-\end{enumerate}
+\end{enumerate} 
 
 \newpage
 
@@ -191,7 +180,7 @@ les opérations dans la base B:
     \includegraphics[width=1\textwidth]{images/octonary_substraction_q3_2.png}
   \end{figure}
 
-  \item $714,2_{8} - 523,7_{8} = X_{8}$
+  \item $85A,E_{16} - B72,1_{16} = X_{16}$
  
   \textbf{Solution:}
   \begin{figure}[h!]
@@ -243,9 +232,7 @@ On sait que la valeur maximale d'une base est (num. base) - 1. Donc dans notre c
 N &= 14 \cdot 15^6 + 14 \cdot 15^5 + 14 \cdot 15^4 + 14 \cdot 15^3 + 14 \cdot 15^2 + 14 \cdot 15^1 + 14 \cdot 15^0 \\
 &= 170\,859\,374
 \end{aligned}
-\]
-
-\newpage
+\]\\
 
 \section*{Question 4}
 On définit une valeur entière positive $0 \leq n \leq 2^{32} - 1$
