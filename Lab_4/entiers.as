@@ -62,17 +62,24 @@ store_bytes:
 sortir:
 		sub x23, x22, 1
 
-		ldrb w26, [x20, x22]
-		ldrb w27, [x21, x22]
-		ldrb w28, [x2, x22]
+		ldrb w26, [x20, x23]
+		ldrb w27, [x21, x23]
+		ldrb w28, [x2, x23]
 
 		lsr w26, w26, 7
 		lsr w27, w27, 7
 		lsr w28, w28, 7
 
-		cmp w26, w28
-		b.eq no_overflow
 
+		cmp w26, w27
+		b.eq check_overflow
+		b.ne no_overflow
+
+check_overflow:
+		cmp w28, w26
+		b.eq overflow
+		b.ne no_overflow
+		
 overflow:
 		mov x0, 1
 		b fin
