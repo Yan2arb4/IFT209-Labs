@@ -62,9 +62,9 @@ store_bytes:
 sortir:
 		sub x23, x22, 1
 
-		ldrb w26, [x20, x23]
-		ldrb w26, [x21, x23]
-		ldrb w28, [x2, x23]
+		ldrb w26, [x20, x22]
+		ldrb w27, [x21, x22]
+		ldrb w28, [x2, x22]
 
 		lsr w26, w26, 7
 		lsr w27, w27, 7
