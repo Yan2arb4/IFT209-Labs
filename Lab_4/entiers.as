@@ -16,8 +16,8 @@
 		bit C des codes condition: report final de l'opération
 
 	Auteur.e.s:
-	Yanéric Roussy
 	Jihane Adjeb
+	Yanéric Roussy
 *******************************************************************************/
 
 
