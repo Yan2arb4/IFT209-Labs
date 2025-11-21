@@ -1,8 +1,15 @@
 /***********************************************************************
 
+
+
 	Calculatrice notation polonaise inverse
 
+
+
 ***********************************************************************/
+
+
+
 
 
 .include "/root/SOURCES/ift209/tools/ift209.as"
@@ -57,7 +64,7 @@ boucle_analyse:
 
     // --- C'est un chiffre, on commence à lire un nombre (entier) ---
 
-    mov     x21, #0                // x21 accumule le nombre
+    mov     x21, 0                // x21 accumule le nombre
 
 lecture_nombre:
 
@@ -69,7 +76,7 @@ lecture_nombre:
 
     add     x21, x21, x2           // x21 += w2
 
-    add     x20, x20, #1           // passe au caractère suivant
+    add     x20, x20, 1           // passe au caractère suivant
 
     ldrb    w1, [x20]              // lit le suivant
 
@@ -85,11 +92,11 @@ fin_lecture_nombre:
 
     // Empilement du nombre lu (x21) dans la pile virtuelle
 
-    str     x21, [x19]
+    str     x21, [x19]			  	// stocke x21 au top de la pile
 
-    add     x19, x19, #8
+    add     x19, x19, 8				// déplace le pointeur de pile vers le haut
 
-    b       boucle_analyse
+    b       boucle_analyse			// retour à l'analyse
 
 
 
@@ -115,7 +122,7 @@ traiter_operateur:
 
     // Si ce n'est ni chiffre ni opérateur valide, on passe au suivant
 
-    add     x20, x20, #1
+    add     x20, x20, 1				// On incrémente
 
     b       boucle_analyse
 
@@ -123,27 +130,27 @@ traiter_operateur:
 
 addition:
 
-    sub     x19, x19, 8
+    sub     x19, x19, 8				// descend le pointeur de pile
 
-    ldr     x22, [x19]
+    ldr     x22, [x19]				// x22 = dépile le deuxieme operande
 
-    sub     x19, x19, 8
+    sub     x19, x19, 8				// on descend encore
 
-    ldr     x21, [x19]
+    ldr     x21, [x19]				// x21 = dépile de premier operande
 
-    add     x21, x21, x22
+    add     x21, x21, x22			// somme des deux
 
-    str     x21, [x19]
+    str     x21, [x19]				// empile le réslutat
 
-    add     x19, x19, 8
+    add     x19, x19, 8				// remonte le pointeur de pile
 
-    add     x20, x20, 1
+    add     x20, x20, 1				// avance dans la chaine (on passe l'operateur)
 
 saut_espace_add:
 
-    ldrb    w0, [x20]
+    ldrb    w0, [x20]				// on lit le charactere courant
 
-    cmp     w0, #' '
+    cmp     w0, #' '				// compare si c'est un espace
 
     beq     increment_add
 
@@ -151,11 +158,21 @@ saut_espace_add:
 
 increment_add:
 
-    add     x20, x20, 1
+    add     x20, x20, 1				// avance d'un caractere
 
     b       saut_espace_add
 
 
+
+/*
+
+* Le reste des opérations sont essentiellement identiques
+
+* à celles de l'addition, même principe pour le pointeur.
+
+* De même pour saut_espace_(x) et increment_(x).
+
+*/
 
 soustraction:
 
@@ -187,7 +204,7 @@ saut_espace_sous:
 
 increment_sous:
 
-    add     x20, x20, #1
+    add     x20, x20, 1
 
     b       saut_espace_sous
 
@@ -259,7 +276,7 @@ saut_espace_div:
 
 increment_div:
 
-    add     x20, x20, #1
+    add     x20, x20, 1
 
     b       saut_espace_div
 
@@ -269,9 +286,9 @@ increment_div:
 
 fin_evaluation:
 
-    sub     x19, x19, #8
+    sub     x19, x19, 8				// descend le pointeur de pile
 
-    ldr     x21, [x19]
+    ldr     x21, [x19]				// x21 = dépile le résultat finsl
 
 
 
@@ -287,9 +304,9 @@ fin_evaluation:
 
     // Épilogue et sortie
 
-    ldp     x29, x30, [sp], #16
+    ldp     x29, x30, [sp], 16		// restaure le frame pointer et link register
 
-    mov     x0, #0
+    mov     x0, 0
 
     bl      exit
 
@@ -303,7 +320,7 @@ tampon: .skip   256             // tampon pour l'entrée (expression)
 
 .align 3
 
-pile:   .skip   800             // pile virtuelle pour les valeurs (100 entrées)
+pile:   .skip   800             // pile virtuelle pour les valeurs (100 entrées), je sais pas c'est quoi le max.
 
 
 
@@ -312,5 +329,4 @@ pile:   .skip   800             // pile virtuelle pour les valeurs (100 entrées
 scanf_fmt:   .asciz " %[^\n]"   // format scanf : lit jusqu'au saut de ligne
 
 printf_fmt:  .asciz "%d\n"      // format printf : résultat numérique avec '\n'
-
 
